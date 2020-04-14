@@ -1,5 +1,12 @@
 #include <stdio.h>
+#ifdef __APPLE__
+#define GL_SILENCE_DEPRECATION
+#include <OpenGL/gl.h>
+#include <GLUT/glut.h>
+#else
+#include <GL/gl.h>
 #include <GL/glut.h>
+#endif
 #include <math.h>
 
 #define PI 3.14159
@@ -74,17 +81,16 @@ class Sphere {
         }
 };
 
-int main (int argc, char** argv) {
+int main (int argc, char **argv) {
     printf("\nmade it this far\n");
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-    glutInitWindowSize(300, 300);
+    glutInitWindowSize(800, 600);
     glutInitWindowPosition(50, 100);
     glutCreateWindow("Sphere");
+    glutDisplayFunc(display);
 
-    Sphere s;
-    s.initGL();
-    glutDisplayFunc(s.display());
+    //s.initGL();
     glutMainLoop();
     return 0;
 }
