@@ -6,7 +6,7 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 
-#app = dash.Dash
+app = dash.Dash()
 
 app.layout = html.Div(children=[
     html.H1(children='Blast Simulation')
@@ -28,13 +28,8 @@ app.layout = html.Div(children=[
             {'label': 'Sum_Tests', 'value': 510300.0}], 
         value='Choose an atomic bomb')
 
-bombs = pd.DataFrame(atoms)
-bombs
-            {},
-    
-    
-    
-    
-    
-    
-    ]
+    html.H2(children=)]
+
+
+if __name__ == "__main__":
+    print("executed")
