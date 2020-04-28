@@ -8,8 +8,21 @@ import dash_html_components as html
 
 app = dash.Dash()
 
-app.layout = html.Div(children=[
-    html.H1(children='Blast Simulation')
+colors = {
+    'background': '#111111',
+    'text': '#7FDBFF',
+}
+
+
+
+app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
+    html.H1(
+        children='Blast Simulation',
+        style={
+            'textAlign': 'center',
+            'color': colors['text']
+        }
+    ),
 
     dcc.Dropdown(
         options=[
@@ -26,10 +39,9 @@ app.layout = html.Div(children=[
             {'label': 'B53 nuke', 'value': 9000.0},
             {'label': 'Tsar Bomba', 'value': 50000.0},
             {'label': 'Sum_Tests', 'value': 510300.0}], 
-        value='Choose an atomic bomb')
-
-    html.H2(children=)]
+        value='Choose an atomic bomb')])
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
+    app.run_server(debug=True)
     print("executed")
