@@ -12,10 +12,76 @@ import pandas as pd
 # Step 1. Launch the application
 app = dash.Dash(__name__)
 
-
-
 # Step 2. Import the dataset
 # Call function based on [dropdown choice(energyVal), smoothSlider(time)]
+
+# Functions:
+# Energy Kilotons TNT --> Joules
+def energyConversion(E):
+    return E * (4.184*10**12)
+
+# radius of shock wave
+def radius(t, energy):
+    rho_o = 1.225 # kg/m^3
+    return (1.031) * energy**(1./5) * rho_o**(-1./5) * t**(2./5)
+
+# velocity of the shock wave w.r.t. rad
+def velocity(radius, energy):
+    rho_o = 1.225 # kg/m^3
+    B = 2.31
+    return radius**(-3./2) * energy**(1/2) * (B*rho_o)**(-1./2)
+
+# max pressure
+def pressure(radius, energy):
+    return 0.155*radius**(-3.)*energy
+
+# simulation
+"""
+def sim():
+    # initial vel
+    u_o = 0 # m/s
+
+    # initial pressure
+    p_o = 101000. # kPa
+    
+    for e, name in zip(energOut, names):
+        # data for each Nuke
+        E = energyConversion(e)
+        rad = []
+        vel = [u_o]
+        pres = [p_o]
+        time = []
+
+        # Event loops
+        for i in range(100):
+            t = float(i)/(10**7)
+
+            r = radius(t, E)
+            rad.append(r)
+            time.append(t)
+
+        for r in rad[1:]:
+            v = velocity(r, E)
+            vel.append(v)
+
+            p = pressure(r, E)
+            pres.append(p)
+
+        # DataFrame construction
+        df1 = pd.DataFrame()
+
+        # add name, time, radius
+        df1['time'] = time
+        df1['radius'] = rad
+
+        # add velocity
+        df1['velocity'] = vel
+
+        # add pressure
+        df1['pressure'] = pres
+    return df1
+"""
+
 
 colors = {
     'background': '#111111',
